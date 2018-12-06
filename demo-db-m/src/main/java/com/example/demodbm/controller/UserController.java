@@ -2,6 +2,8 @@ package com.example.demodbm.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demodbm.business.service.IUserService;
 import com.example.demodbm.business.dto.User;
 import java.io.BufferedReader;
@@ -120,6 +122,23 @@ public class UserController {
       e.printStackTrace();
     }
     return "OK";
+  }
+
+
+  @RequestMapping("/getXnUser")
+  public List<User> getXnUser(String fileName) {
+
+    try {
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.lambda().eq(User::getUPhone,linePhone);
+        Page<User> userPage = new Page<>(1L,10L);
+        IPage<User> userIPage = userService.page(userPage,null);
+        return userIPage.getRecords();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }
 
