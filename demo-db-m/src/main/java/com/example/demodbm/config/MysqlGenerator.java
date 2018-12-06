@@ -30,13 +30,12 @@ import java.util.Scanner;
  */
 
 public class MysqlGenerator {
-
   //  private final static String rootPath = "D:\\jarsProject\\base-parent\\service-core\\src\\main\\java\\site\\kenz\\base\\servicecore";
-  private final static String rootPath = "D:\\jarsProject\\finance-bidong\\bidong-service\\src\\main\\java";
-  private final static String xmlPath = "D:\\jarsProject\\finance-bidong\\bidong-service\\src\\main\\resources";
-  private final static String moduleName = "bidongservice";
-  private final static String packPath = "com.honglu.finance";
-  private final static String[] tables = new String[] { "xn_bd_certification","xn_bd_regist_member" };
+  private final static String rootPath = "D:\\jarsProject\\hui_newgit_loan-finance-report\\finance-dadi-job\\src\\main\\java\\";
+  private final static String xmlPath = "D:\\jarsProject\\hui_newgit_loan-finance-report\\finance-dadi-job\\src\\main\\resources";
+  private final static String moduleName = "";
+  private final static String packPath = "com.honglu.finance.financedadijob";
+  private final static String[] tables = new String[] { "loan_dadi_premium_batch","loan_dadi_premium"};
   /**
    * <p>
    * MySQL 生成演示
@@ -62,9 +61,10 @@ public class MysqlGenerator {
             //.setKotlin(true) 是否生成 kotlin 代码
             .setAuthor("kenzhao")
             // 自定义文件命名，注意 %s 会自动填充表实体属性！
-            .setEntityName("%sEntity")
-            .setMapperName("%sDao")
-            .setXmlName("%sDao")
+//            .setEntityName("%sEntity")
+            .setEntityName("%s")
+            .setMapperName("%sMapper")
+            .setXmlName("%sMapper")
             .setServiceName("MP%sService")
             .setServiceImplName("%sServiceImpl")
             .setControllerName("%sController")
