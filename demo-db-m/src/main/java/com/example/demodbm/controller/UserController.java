@@ -4,8 +4,14 @@ package com.example.demodbm.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demodbm.business.entity.TUserNew;
+import com.example.demodbm.business.entity.TUserRecord;
 import com.example.demodbm.business.service.IUserService;
-import com.example.demodbm.business.dto.User;
+import com.example.demodbm.business.entity.User;
+import com.example.demodbm.business.service.MPTUserNewService;
+import com.example.demodbm.business.service.MPTUserRecordService;
+import com.example.demodbm.business.service.impl.TUserRecordServiceImpl;
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,10 +44,29 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 
+  private Gson gson = new Gson();
   @Autowired
   private IUserService userService;
 
+  @Autowired
+  private MPTUserRecordService tUserRecordService;
+  @Autowired
+  private MPTUserNewService mptUserNewService;
+
   private SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+  @RequestMapping("/addXnUserNew")
+  public String addXnUserNew(String fileName) {
+    userService.addUserInfo(fileName);
+
+    return "OK";
+  }
+  @GetMapping("/addXnUserNewAll")
+  public String addXnUserNew() {
+    userService.addUserInfo("all");
+
+    return "OK";
+  }
 
   @RequestMapping("/addXnUser")
   public String addXnUser(String fileName) {
@@ -123,6 +150,8 @@ public class UserController {
     }
     return "OK";
   }
+
+
 
 
   @RequestMapping("/getXnUser")

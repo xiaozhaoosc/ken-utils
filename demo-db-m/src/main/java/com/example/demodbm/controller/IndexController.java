@@ -1,10 +1,9 @@
 package com.example.demodbm.controller;
 
 
-import com.example.demodbm.business.dto.User;
+import com.example.demodbm.business.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.java.Log;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

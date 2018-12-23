@@ -1,7 +1,7 @@
-package com.example.demodbm.business.dao;
+package com.example.demodbm.business.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.demodbm.business.dto.User;
+import com.example.demodbm.business.entity.User;
 
 /**
  * Description:

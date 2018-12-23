@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
-@MapperScan("com.example.demodbm.business.dao")
+@MapperScan("com.example.demodbm.business.mapper")
 public class DemoDbMApplication {
   /**
    * 分页插件

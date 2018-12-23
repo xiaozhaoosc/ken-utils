@@ -1,7 +1,7 @@
 package com.example.demodbm.business.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.demodbm.business.dto.User;
+import com.example.demodbm.business.entity.User;
 
 /**
  * Description:
@@ -12,4 +12,9 @@ import com.example.demodbm.business.dto.User;
 
 public interface IUserService extends IService<User> {
 
+  /**
+   * 添加用户信息
+   * @param fileName
+   */
+  void addUserInfo(String fileName);
 }

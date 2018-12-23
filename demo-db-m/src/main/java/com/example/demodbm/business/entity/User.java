@@ -1,4 +1,4 @@
-package com.example.demodbm.business.dto;
+package com.example.demodbm.business.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
