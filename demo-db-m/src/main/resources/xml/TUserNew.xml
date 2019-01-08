@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demodbm.business.mapper.TUserNewMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demodbm.business.entity.TUserNew">
+        <result column="hsid" property="hsid" />
+        <result column="c_time" property="cTime" />
+        <result column="create_time" property="createTime" />
+        <result column="u_cardid" property="uCardid" />
+        <result column="u_name" property="uName" />
+        <result column="u_phone" property="uPhone" />
+        <result column="amount" property="amount" />
+        <result column="bank_no" property="bankNo" />
+        <result column="c_time_long" property="cTimeLong" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        hsid, c_time, create_time, u_cardid, u_name, u_phone, amount, bank_no, c_time_long
+    </sql>
+
+</mapper>

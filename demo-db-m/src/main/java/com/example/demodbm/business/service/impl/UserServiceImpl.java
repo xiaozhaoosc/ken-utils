@@ -52,10 +52,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
    */
   @Override
   public void addUserInfo(String fileName) {
-    String[] fileNames = {"1101","1031","102731","102527","102225","101922"};
+//    String[] fileNames = {"1101","1031","102731","102527","102225","101922"};
     String[] fileNames0 = {"12","13","14","15","16","17","18","19","1101","1031","102731","102527","102225","101922",
         "110205","110507","110709","1107011","1107013","1107015","1107017","1107019","1107021","1107023","1107025","1107027","1107029"};
-    String[] fileNames2 = {"1201","1203","1205","1206","1207","1209","1210","1211","1212","1213","1214","1216","1217",
+    String[] fileNames = {"1201","1203","1205","1206","1207","1209","1210","1211","1212","1213","1214","1216","1217",
         "1218","1219","1220","1221","1222"};
     if ("all".equals(fileName)) {
       for (int i = 0; i < fileNames.length; i++) {
@@ -69,6 +69,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
   }
 
   private void addUser(String fileName){
+    int count = 0;
+    int sumCount = 0;
     try {
       InputStream inputStream = new FileInputStream(new File(fileName));
       BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -81,6 +83,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
       Map<String, String> isExits = new HashMap<>();
       while ((line = reader.readLine()) != null) {
         i++;
+        sumCount = i;
 //        if (i > 20) {
 //          break;
 //        }
@@ -89,6 +92,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
         }
         if (users.size() >= 200) {
           mptUserNewService.saveBatch(users);
+          count = count + users.size();
           users.clear();
           isExits.clear();
         }
@@ -143,6 +147,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
         isExits.put(linePhone, "1");
       }
       if (users.size() > 0) {
+        count = count + users.size();
         mptUserNewService.saveBatch(users);
         users.clear();
       }
@@ -153,5 +158,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
     } catch (Exception e) {
       e.printStackTrace();
     }
+
+    log.info("---------count:" + count + "---------sumCount:" + sumCount);
   }
 }
