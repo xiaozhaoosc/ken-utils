@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -68,6 +69,33 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
 
   }
 
+  /**
+   * 用户信息
+   */
+  @Override
+  @Cacheable(value = "my-redis-user")
+  public User getUserInfo(String phone) {
+    log.info("begin in getUserInfo---------" + phone + "---------");
+    QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+    queryWrapper.lambda().eq(User::getUPhone,phone);
+    User user = (User)userService.getObj(queryWrapper);
+    log.info("end in getUserInfo---------" + phone + "---------");
+    return user;
+  }
+
+  /**
+   * 用户信息
+   */
+  @Override
+  @Cacheable(value = "my-redis-user",key = "#phone")
+  public User getUserInfo2(String phone) {
+    log.info("begin in getUserInfo2---------" + phone + "---------");
+    QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+    queryWrapper.lambda().eq(User::getUPhone,phone);
+    User user = (User)userService.getObj(queryWrapper);
+    log.info("end in getUserInfo2---------" + phone + "---------");
+    return user;
+  }
   private void addUser(String fileName){
     int count = 0;
     int sumCount = 0;

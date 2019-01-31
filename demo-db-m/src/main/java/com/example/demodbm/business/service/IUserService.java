@@ -17,4 +17,14 @@ public interface IUserService extends IService<User> {
    * @param fileName
    */
   void addUserInfo(String fileName);
+  /**
+   * 用户信息
+   * @param phone
+   */
+  User getUserInfo(String phone);
+  /**
+   * 用户信息
+   * @param phone
+   */
+  User getUserInfo2(String phone);
 }

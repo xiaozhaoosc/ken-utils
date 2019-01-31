@@ -91,6 +91,29 @@
       <version>${mybatisplus.version}</version>
       <!--<version>3.0.2</version>-->
     </dependency>
+    <dependency>
+      <groupId>com.github.printparam</groupId>
+      <artifactId>printparam-spring-boot-starter</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <!-- 缓存: spring cache -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+
+    <!-- 缓存: redis -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <!-- 将作为Redis对象序列化器 -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.42</version>
+    </dependency>
   </dependencies>
 
   <build>

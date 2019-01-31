@@ -40,5 +40,6 @@ public class IndexController {
     log.info("request index ");
     return "index";
   }
+
 }
 
