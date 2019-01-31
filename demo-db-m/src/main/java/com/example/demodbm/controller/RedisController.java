@@ -1,8 +1,5 @@
 package com.example.demodbm.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demodbm.business.entity.User;
 import com.example.demodbm.business.service.IUserService;
 import com.google.gson.Gson;
