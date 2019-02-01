@@ -2,6 +2,7 @@ package com.example.demodbm.controller;
 
 import com.example.demodbm.business.entity.User;
 import com.example.demodbm.business.service.IUserService;
+import com.example.demodbm.config.RedisUtils;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class RedisController {
   private RedisTemplate redisTemplate;
   @Autowired
   private IUserService userService;
+  @Autowired
+  private RedisUtils redisUtils;
 
   @RequestMapping("/setKey")
   private String setKey(@RequestParam String keyStr,@RequestParam String valueStr){
@@ -59,5 +62,29 @@ public class RedisController {
     User user2 = (User)userService.getUserInfo2(keyStr);
     log.info("RedisController getdb setUser setKey user2:" + gson.toJson(user2));
     return valueOperations.get(keyStr);
+  }
+  @RequestMapping("/incr")
+  private Object incr(@RequestParam String keyStr){
+    Integer value = (Integer)redisUtils.get(keyStr);
+    if (value != null && value > 10) {
+      return value;
+    }
+    if (value == null) {
+      value = 1;
+      redisUtils.set(keyStr, value, 120L);
+    }else{
+      redisUtils.incr(keyStr, 1);
+    }
+
+    String keyStr2 = keyStr + "2";
+    redisUtils.set(keyStr2, value, 1L);
+    Object valueObj = redisUtils.get(keyStr2);
+    while (valueObj != null) {
+      log.info("incr in:" + valueObj);
+      redisUtils.incr(keyStr2, 1);
+      valueObj = redisUtils.get(keyStr2);
+    }
+    log.info("incr:" + valueObj);
+    return valueObj;
   }
 }

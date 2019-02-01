@@ -70,9 +70,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
 
   /**
    * 用户信息
+   * 线程安全
    */
   @Override
-  @Cacheable(value = "my-redis-user")
+  @Cacheable(value = "my-redis-user", sync=true)
   public User getUserInfo(String phone) {
     log.info("begin in getUserInfo---------" + phone + "---------");
     QueryWrapper<User> queryWrapper = new QueryWrapper<>();
