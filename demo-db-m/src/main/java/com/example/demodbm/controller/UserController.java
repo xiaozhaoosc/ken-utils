@@ -165,5 +165,18 @@ public class UserController {
     }
     return null;
   }
+
+  @RequestMapping("/syncXnUser")
+  public String syncXnUser(String dateStr) {
+
+    try {
+
+      Long countNum = userService.syncUser(dateStr);
+      return "Ok" + countNum;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 }
 

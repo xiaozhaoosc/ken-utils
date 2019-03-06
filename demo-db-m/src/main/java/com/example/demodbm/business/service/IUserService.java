@@ -27,4 +27,11 @@ public interface IUserService extends IService<User> {
    * @param phone
    */
   User getUserInfo2(String phone);
+
+  /**
+   * 同步信息
+   * @param date
+   * @return
+   */
+  Long syncUser(String date);
 }

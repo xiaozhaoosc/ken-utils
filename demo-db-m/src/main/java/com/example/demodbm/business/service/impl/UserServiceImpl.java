@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demodbm.business.entity.TUserNew;
 import com.example.demodbm.business.entity.TUserRecord;
 import com.example.demodbm.business.entity.User;
+import com.example.demodbm.business.entity.UserWei;
 import com.example.demodbm.business.mapper.UserDao;
 import com.example.demodbm.business.service.IUserService;
 import com.example.demodbm.business.service.MPTUserNewService;
 import com.example.demodbm.business.service.MPTUserRecordService;
+import com.example.demodbm.business.service.MPTUserWeiService;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;
@@ -46,6 +48,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
   private MPTUserRecordService tUserRecordService;
   @Autowired
   private MPTUserNewService mptUserNewService;
+  @Autowired
+  private MPTUserWeiService mptUserWeiService;
 
   /**
    * 添加用户信息
@@ -188,5 +192,58 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
     }
 
     log.info("---------count:" + count + "---------sumCount:" + sumCount);
+  }
+
+  /**
+   * 同步信息
+   */
+  @Override
+  public Long syncUser(String date) {
+    Long resultNum = 0L;
+    int day = LocalDateTime.now().getDayOfYear();
+    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    LocalDateTime ldt = LocalDateTime.parse(date + " 00:00:00",df);
+    LocalDateTime ldg = ldt.plusDays(1L);
+
+    while (day > ldg.getDayOfYear()) {
+      QueryWrapper<TUserRecord> queryWrapper = new QueryWrapper<>();
+      queryWrapper.lambda().between(TUserRecord::getCreateTime, ldt, ldg);
+      List<TUserRecord> tUserRecordList = tUserRecordService.list(queryWrapper);
+      resultNum = resultNum + tUserRecordList.size();
+      log.info(ldg.toString() + "个数：" + tUserRecordList.size());
+      ldt = ldg;
+      ldg = ldt.plusDays(1L);
+
+      List<UserWei> userWeis = new ArrayList<>();
+      Map<String, String> isExits = new HashMap<>();
+      int i = 0;
+      for (TUserRecord td:tUserRecordList
+      ) {
+        i++;
+        QueryWrapper<UserWei> userWeiQueryWrapper = new QueryWrapper<>();
+        userWeiQueryWrapper.lambda().eq(UserWei::getUPhone, td.getUPhone());
+        UserWei userWei = mptUserWeiService.getOne(userWeiQueryWrapper);
+        if (userWei == null && !isExits.containsKey(td.getUPhone())) {
+          String tdStr = gson.toJson(td);
+          UserWei newUserWei = gson.fromJson(tdStr, UserWei.class);
+          newUserWei.setHsid(null);
+          userWeis.add(newUserWei);
+        }else{
+//          log.info(td.getUPhone() + "-------" + i);
+        }
+        isExits.put(td.getUPhone(), "1");
+      }
+      if (userWeis.size() > 0) {
+        log.info(ldg.toString() + "insert个数：" + userWeis.size() + "isExits个数：" + isExits.size());
+        mptUserWeiService.saveBatch(userWeis);
+        try {
+          Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+
+    }
+    return resultNum;
   }
 }

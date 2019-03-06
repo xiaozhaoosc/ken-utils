@@ -35,7 +35,7 @@ public class MysqlGenerator {
   private final static String xmlPath = "D:\\github\\ken-utils\\demo-db-m\\src\\main\\resources";
   private final static String moduleName = "";
   private final static String packPath = "com.example.demodbm.business";
-  private final static String[] tables = new String[] { "t_user_new"};
+  private final static String[] tables = new String[] { "xn_pay_withhold_fq"};
   /**
    * <p>
    * MySQL 生成演示
