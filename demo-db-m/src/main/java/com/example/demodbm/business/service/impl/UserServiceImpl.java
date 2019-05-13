@@ -59,17 +59,24 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
 //    String[] fileNames = {"1101","1031","102731","102527","102225","101922"};
     String[] fileNames0 = {"12","13","14","15","16","17","18","19","1101","1031","102731","102527","102225","101922",
         "110205","110507","110709","1107011","1107013","1107015","1107017","1107019","1107021","1107023","1107025","1107027","1107029"};
-    String[] fileNames = {"1201","1203","1205","1206","1207","1209","1210","1211","1212","1213","1214","1216","1217",
-        "1218","1219","1220","1221","1222"};
+    String[] fileNames = {"0214","0216","0218","0220","0222","0224","0226","0228"};
     if ("all".equals(fileName)) {
       for (int i = 0; i < fileNames.length; i++) {
         log.info("---------" + i + "---------" + fileNames[i]);
-        addUser("d:\\data\\csv\\" + fileNames[i] + ".csv");
+        addUser("e:\\csv\\csv\\" + fileNames[i] + ".csv");
       }
     }else{
       addUser(fileName);
     }
 
+  }
+
+  /**
+   * 添加用户信息
+   */
+  @Override
+  public void addUserInfo2(String fileName) {
+    addUser2(fileName);
   }
 
   /**
@@ -99,6 +106,101 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements IUserS
     User user = (User)userService.getObj(queryWrapper);
     log.info("end in getUserInfo2---------" + phone + "---------");
     return user;
+  }
+
+
+  private void addUser2(String fileName){
+    int count = 0;
+    int sumCount = 0;
+    try {
+      InputStream inputStream = new FileInputStream(new File(fileName));
+      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+      String line;
+      int i = 0;
+      List<TUserNew> users = new ArrayList<>();
+      List<TUserRecord> tUserRecords = new ArrayList<>();
+
+      Map<String, String> isExits = new HashMap<>();
+      while ((line = reader.readLine()) != null) {
+        i++;
+        sumCount = i;
+//        if (i > 20) {
+//          break;
+//        }
+        if (line == null || line.length() < 500) {
+          continue;
+        }
+        if (users.size() >= 200) {
+          mptUserNewService.saveBatch(users);
+          count = count + users.size();
+          users.clear();
+          isExits.clear();
+        }
+
+        if (tUserRecords.size() >= 500) {
+          tUserRecordService.saveBatch(tUserRecords);
+          tUserRecords.clear();
+        }
+//                System.out.println(i + ":" + line);
+        int index = line.indexOf("\"\"phone\"\":\"\"");
+//        int createTimeIndex = line.indexOf("\"\"create_time\"\":\"\"");
+        int indexName = line.indexOf("\"\"name\"\":\"\"");
+        int indexAmount = line.indexOf("\"\"lamt\"\":");
+//        int indexAccNo = line.indexOf("\"\"card\"\":\"\"");
+
+        String linePhone = line.substring(index + 12, index + 23);
+        String lineName = line.substring(indexName + 11, indexName + 14);
+//        String createTime = line.substring(createTimeIndex + 18, createTimeIndex + 37);
+        String amount = line.substring(indexAmount + 11, indexAmount + 18);
+//        String accNo = line.substring(indexAccNo + 13, indexAccNo + 32);
+//        accNo = accNo.replaceAll("\"", "");
+//        accNo = accNo.replaceAll(",", "");
+
+        amount = amount.replaceAll("\"", "");
+        amount = amount.replaceAll(",", "");
+//          lineName =db.NtNotifyAppMsgs.find({modleType:'XPM001',lastTime:{$gt:1536988172000}});
+        lineName = lineName.replaceAll("\"", "");
+        System.out.println(i + ":" + linePhone + lineName + amount );
+
+        QueryWrapper<TUserNew> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(TUserNew::getUPhone, linePhone);
+
+        TUserNew user = new TUserNew();
+        user.setUPhone(linePhone);
+        user.setUName(lineName);
+        LocalDateTime ldt = LocalDateTime.now();
+        user.setCreateTime(ldt);
+        user.setCTime(LocalDateTime.now());
+        user.setCTimeLong(System.currentTimeMillis());
+        user.setAmount(new BigDecimal(amount));
+//        user.setBankNo(accNo);
+        String userStr = gson.toJson(user);
+        tUserRecords.add(gson.fromJson(userStr, TUserRecord.class));
+        TUserNew userSel = mptUserNewService.getOne(queryWrapper);
+        if (userSel != null && userSel.getHsid() != null) {
+          continue;
+        }
+        if (isExits.containsKey(linePhone)) {
+          continue;
+        }
+        users.add(user);
+        isExits.put(linePhone, "1");
+      }
+      if (users.size() > 0) {
+        count = count + users.size();
+        mptUserNewService.saveBatch(users);
+        users.clear();
+      }
+      if (tUserRecords.size() > 0) {
+        tUserRecordService.saveBatch(tUserRecords);
+        users.clear();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    log.info("---------count:" + count + "---------sumCount:" + sumCount);
   }
   private void addUser(String fileName){
     int count = 0;

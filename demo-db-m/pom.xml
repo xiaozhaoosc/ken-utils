@@ -91,11 +91,11 @@
       <version>${mybatisplus.version}</version>
       <!--<version>3.0.2</version>-->
     </dependency>
-    <dependency>
-      <groupId>com.github.printparam</groupId>
-      <artifactId>printparam-spring-boot-starter</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.github.printparam</groupId>-->
+      <!--<artifactId>printparam-spring-boot-starter</artifactId>-->
+      <!--<version>0.0.1-SNAPSHOT</version>-->
+    <!--</dependency>-->
 
     <!-- 缓存: spring cache -->
     <dependency>

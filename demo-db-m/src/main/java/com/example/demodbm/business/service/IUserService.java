@@ -18,6 +18,11 @@ public interface IUserService extends IService<User> {
    */
   void addUserInfo(String fileName);
   /**
+   * 添加用户信息
+   * @param fileName
+   */
+  void addUserInfo2(String fileName);
+  /**
    * 用户信息
    * @param phone
    */

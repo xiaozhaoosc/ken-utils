@@ -51,6 +51,11 @@ public class UserController {
 
   private SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+  @RequestMapping("/user/add")
+  public String addUser(String fileName) {
+    userService.addUserInfo2(fileName);
+    return "OK";
+  }
   @RequestMapping("/addXnUserNew")
   public String addXnUserNew(String fileName) {
     userService.addUserInfo(fileName);
