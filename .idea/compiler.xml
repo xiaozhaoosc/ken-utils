@@ -6,15 +6,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="demo-db-m" />
         <module name="tesetdb" />
+        <module name="demo-db-m" />
+        <module name="xxl-job-admin" />
         <module name="utils" />
+        <module name="xxl-job-executor" />
+        <module name="xxl-job-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo-db-m" target="1.8" />
       <module name="tesetdb" target="1.5" />
       <module name="utils" target="1.5" />
+      <module name="xxl-job-admin" target="1.8" />
+      <module name="xxl-job-core" target="1.8" />
+      <module name="xxl-job-executor" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

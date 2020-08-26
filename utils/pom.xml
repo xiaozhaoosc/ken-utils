@@ -33,6 +33,12 @@
             <artifactId>fluent-hc</artifactId>
             <version>4.5.8</version>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.50.Final</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
 <!--        <dependency>-->
 <!--            <groupId>org.apache.httpcomponents</groupId>-->
