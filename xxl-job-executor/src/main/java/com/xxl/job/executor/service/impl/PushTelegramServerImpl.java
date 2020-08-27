@@ -35,7 +35,7 @@ public class PushTelegramServerImpl implements PushTelegramServer {
 //        List<Mzitu> mzitus = mzituDao.pageList(0,4,"2020082612mzitu详细内容");
         List<Mzitu> mzitus = mzituDao.pageList(0,4,tableName);
         if (mzitus != null && mzitus.size() > 0) {
-//            String url3 = "https://api.telegram.org/bot713946208:AAGS2h1IU_xhRxCmvX5DUr8RVjq8Gd3C77g/sendMediaGroup";
+//            String url3 = "https://api.telegram.org/bot9139462568:AAGS2h1IU_xhRoimvX5DUr8RVjq8Gd3C77g/sendMediaGroup";
             JsonObject jsonObject = new JsonObject();
             //https://t.me/meitujianshang
             jsonObject.addProperty("chat_id","@meitujianshang");

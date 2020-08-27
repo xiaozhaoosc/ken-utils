@@ -169,7 +169,7 @@ public class ApacheHttpClientUtils {
 
     public static void main(String[] args) throws Exception {
         ApacheHttpClientUtils httpUrlConnectionDemo = new ApacheHttpClientUtils();
-        String url = "https://api.telegram.org/bot713946208:AAGS2h1IU_xhRxCmvX5DUr8RVjq8Gd3C77g/getMe";
+        String url = "https://api.telegram.org/bot9139462568:AAGS2h1IU_xhRoimvX5DUr8RVjq8Gd3C77g/getMe";
 //        Map <String, String > params = new HashMap<String, String>
 //        ();
 //        params.put("foo", "bar中文");
@@ -207,8 +207,8 @@ GetIDs Bot, [25.08.20 18:01]
          */
         System.out.println("http get rsp:" + httpUrlConnectionDemo.sendGet(url));
         //https://api.telegram.org/bot<token>/METHOD_NAME
-        String url2 = "https://api.telegram.org/bot713946208:AAGS2h1IU_xhRxCmvX5DUr8RVjq8Gd3C77g/sendPhoto";
-        String url3 = "https://api.telegram.org/bot713946208:AAGS2h1IU_xhRxCmvX5DUr8RVjq8Gd3C77g/sendMediaGroup";
+        String url2 = "https://api.telegram.org/bot9139462568:AAGS2h1IU_xhRoimvX5DUr8RVjq8Gd3C77g/sendPhoto";
+        String url3 = "https://api.telegram.org/bot9139462568:AAGS2h1IU_xhRoimvX5DUr8RVjq8Gd3C77g/sendMediaGroup";
         JsonObject jsonObject = new JsonObject();
         //https://t.me/meitujianshang
         jsonObject.addProperty("chat_id","@meitujianshang");
