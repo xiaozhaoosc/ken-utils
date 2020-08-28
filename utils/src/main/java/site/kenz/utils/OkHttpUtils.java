@@ -54,7 +54,7 @@ public class OkHttpUtils {
         OkHttpClient clientProxy = new OkHttpClient.Builder()
                 .proxy(p).build();
 
-        String url2 = "https://api.telegram.org/bot9139462568:AAGS2h1IU_xhRoimvX5DUr8RVjq8Gd3C77g/sendPhoto";
+        String url2 = "xxx/sendPhoto";
         JsonObject jsonObject0 = new JsonObject();
         //https://t.me/meitujianshang
         jsonObject0.addProperty("chat_id","@meitujianshang");

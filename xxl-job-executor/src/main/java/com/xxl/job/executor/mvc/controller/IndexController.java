@@ -26,13 +26,13 @@ public class IndexController {
     @RequestMapping("/test")
     @ResponseBody
     String test() {
-        pushTelegramServer.pushPage("2020082612mzitu详细内容","https://api.telegram.org/bot9139462568:AAGS2h1IU_xhRoimvX5DUr8RVjq8Gd3C77g/sendMediaGroup");
+        pushTelegramServer.pushPage("2020082612mzitu详细内容","xxx/sendMediaGroup");
         return "ok";
     }
     @RequestMapping("/pushPageFail")
     @ResponseBody
     String pushPageFail() {
-        pushTelegramServer.pushPageFail("2020082612mzitu详细内容","https://api.telegram.org/bot9139462568:AAGS2h1IU_xhRoimvX5DUr8RVjq8Gd3C77g/sendPhoto");
+        pushTelegramServer.pushPageFail("2020082612mzitu详细内容","xxx/sendPhoto");
         return "ok";
     }
 }
