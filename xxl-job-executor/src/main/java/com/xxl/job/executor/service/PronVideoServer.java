@@ -13,5 +13,10 @@ public interface PronVideoServer {
      * @param params
      */
     void getVideos(String[] params);
+    /**
+     * 输入密码的Star
+     * @param params
+     */
+    void getVideosByCookieStar(String[] params);
 
 }

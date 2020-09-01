@@ -33,6 +33,16 @@ public class PronVideoServerImpl  implements PronVideoServer {
     }
 
     /**
+     * 输入密码的Star
+     *
+     * @param params
+     */
+    @Override
+    public void getVideosByCookieStar(String[] params) {
+        getVideoStar(params);
+    }
+
+    /**
      * 自动登陆的
      * 前两个参数为账号和密码
      *
@@ -100,6 +110,9 @@ public class PronVideoServerImpl  implements PronVideoServer {
                         String viewsStr = viewsNum;
 //                System.out.println(viewsNum + ":" + viewsNum + ":" + viewsNum );
                         viewsNum = viewsNum.replaceAll(",", "");
+                        if (viewsNum.length() < 1) {
+                            continue;
+                        }
                         String lastStr = viewsNum.substring(viewsNum.length()-1);
                         int beishu = 1;
                         if ("K".equals(lastStr)) {
@@ -187,6 +200,70 @@ public class PronVideoServerImpl  implements PronVideoServer {
         }
     }
 
+    private void getVideoStar(String[] params) {
+        Map<String, String> headParam = getHead(params[0]);
+        if (params.length > 1) {
+            for (int l = 1; l < params.length; l++) {
+                String searchUrl = params[l];
+                String searchHtml = null;
+                try {
+                    searchHtml = ApacheHttpClientUtils.sendGet(searchUrl,headParam);
+                } catch (Exception e) {
+                    continue;
+                }
+                Document searchDoc = Jsoup.parse(searchHtml);
+                Elements wrappers = searchDoc.select(".thumbnail-info-wrapper");
+                if (wrappers != null && wrappers.size() > 0) {
+                    for (int i = 0; i < wrappers.size(); i++) {
+                        Element element = wrappers.get(i);
+                        //评分
+                        String valNum = element.select(".value").text();
+                        //观看次数
+                        String viewsNum = element.select(".views").select("var").text();
+                        String viewsStr = viewsNum;
+//                System.out.println(viewsNum + ":" + viewsNum + ":" + viewsNum );
+                        viewsNum = viewsNum.replaceAll(",", "");
+                        if (viewsNum.length() < 1) {
+                            continue;
+                        }
+                        String lastStr = viewsNum.substring(viewsNum.length()-1);
+                        int beishu = 1;
+                        if ("K".equals(lastStr)) {
+                            beishu = 1000;
+                            viewsNum = viewsNum.substring(0, viewsNum.length()-1);
+                        }else if("M".equals(lastStr)){
+                            beishu = 10000;
+                            viewsNum = viewsNum.substring(0, viewsNum.length()-1);
+                        }
+//                b > 78 && c > 300000
+                        String openUrl = element.select("a").attr("href");
+                        valNum = valNum.replace("%", "");
+                        int val = 30;
+                        int views = 30;
+
+                        try {
+                            val = Integer.valueOf(valNum);
+                            views = new BigDecimal(viewsNum).multiply(new BigDecimal(beishu)).intValue();
+//                    System.out.println(val + ":" + views + ":" + viewsNum );
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        getVideo(new String[]{params[0],openUrl});
+//                        try {
+//                            detailHtml = ApacheHttpClientUtils.sendGet(parentUrl,headParam);
+//                        } catch (Exception e) {
+////                    e.printStackTrace();
+////                    System.out.println("error" + detailHtml);
+//                        }
+//                        if (detailHtml == null) {
+//                            continue;
+//                        }
+                    }
+                }
+            }
+        }
+    }
 
 
     private void postIndex() throws Exception {
