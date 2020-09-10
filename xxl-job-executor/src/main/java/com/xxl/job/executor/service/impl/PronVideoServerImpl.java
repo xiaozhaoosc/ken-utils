@@ -92,6 +92,9 @@ public class PronVideoServerImpl  implements PronVideoServer {
         if (params.length > 1) {
             for (int l = 1; l < params.length; l++) {
                 String searchUrl = params[l];
+                if (searchUrl.indexOf("pornhub.com") < 0) {
+                    searchUrl = indexUrl + searchUrl;
+                }
                 String searchHtml = null;
                 try {
                     searchHtml = ApacheHttpClientUtils.sendGet(searchUrl,headParam);
