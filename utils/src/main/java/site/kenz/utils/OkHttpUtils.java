@@ -70,6 +70,17 @@ public class OkHttpUtils {
     }
 
     public static void main(String[] args) throws Exception {
+
+        String sd = "var gid = 44473901038;\n" +
+                "\tvar uc = 0;\n" +
+                "\tvar img = 'https://pics.javbus.com/cover/7vz6_b.jpg';";
+        String[] sdf = sd.replaceAll("var","").replaceAll(" ","").replaceAll("\n","").replaceAll("\t","").replaceAll("'","").split(";");
+        for (String s:
+        sdf) {
+            System.out.println("" + s.replaceAll("var",""));
+        }
+
+
 //        OkHttpUtils okHttpDemo = new OkHttpUtils();
 //        String url = "https://httpbin.org/post";
 //        Map<String, String>  params = new HashMap<String, String>();
@@ -79,7 +90,7 @@ public class OkHttpUtils {
 //
 //        url = "https://httpbin.org/get";
 //        System.out.println("http get rsp:" + okHttpDemo.sendGet(url));
-        get();
+//        get();
     }
 
 }

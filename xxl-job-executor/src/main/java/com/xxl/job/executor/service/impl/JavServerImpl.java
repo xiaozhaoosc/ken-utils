@@ -63,6 +63,10 @@ public class JavServerImpl implements JavServer {
 
             String contextSub = ApacheHttpClientUtils.sendGet(movieBox.attr("href"));
 
+
+
+
+
             Document docSub = Jsoup.parse(contextSub);
             Elements genre = docSub.select(".row").select(".genre");
             //分类   <span class="genre"><a href="https://www.javbus.com/genre/e">巨乳</a></span>
@@ -73,17 +77,26 @@ public class JavServerImpl implements JavServer {
 //            log.info(genre.select("a").select("font").select("font").text());
             log.info(genre.last().select("a").attr("href"));
             log.info(genre.last().select("a").text());
-            //https://www.javbus.com/ajax/uncledatoolsbyajax.php?gid=44473963134&lang=zh&img=https://pics.javbus.com/cover/7vz6_b.jpg&uc=0&floor=688
-//            Element table = docSub.select("tr[onmouseover]").select(".table").get(0);
-            Elements trs = docSub.select("tr a");
-            for (Element tr:trs
-            ) {
-                log.info(tr.select("td").get(0).select("a").attr("href") );
-                log.info(tr.select("td").get(0).select("a").attr("title") );
 
-                log.info(tr.select("td").get(1).select("a").select("font").text() );
-                log.info(tr.select("td").get(2).select("a").select("font").select("font").text());
-            }
+
+            String downParam = docSub.select("script").get(8).html();
+            String[] downParams = downParam.replaceAll("var","").replaceAll(" ","").replaceAll("\n","").replaceAll("\t","").replaceAll("'","").split(";");
+            log.info(downParam);
+            String downUrl = String.format("https://www.javbus.com/ajax/uncledatoolsbyajax.php?%s&lang=zh&img=%s&uc=%s&floor=%s",downParams[0],downParams[1],downParams[2]);
+
+            //https://www.javbus.com/ajax/uncledatoolsbyajax.php?gid=44473963134&lang=zh&img=https://pics.javbus.com/cover/7vz6_b.jpg&uc=0&floor=688
+//            Element table = docSub.select("tr[onmouseover]").select(".table").get(0);  9
+
+//            String downUrl = String.format("https://www.javbus.com/ajax/uncledatoolsbyajax.php?gid=%s&lang=zh&img=%s&uc=%s&floor=%s",);
+//            Elements trs = docSub.select("tr a");
+//            for (Element tr:trs
+//            ) {
+//                log.info(tr.select("td").get(0).select("a").attr("href") );
+//                log.info(tr.select("td").get(0).select("a").attr("title") );
+//
+//                log.info(tr.select("td").get(1).select("a").select("font").text() );
+//                log.info(tr.select("td").get(2).select("a").select("font").select("font").text());
+//            }
         }
 //        String html = ApacheHttpClientUtils.sendGet(url, headParam);
 //        System.out.println(html);
