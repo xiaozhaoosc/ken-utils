@@ -54,7 +54,7 @@ public class PushTelegramServerImpl implements PushTelegramServer {
             jsonObject.addProperty("media", GsonUtil.objectToJson(list));
 //        jsonObject.addProperty("caption","1");
 //        jsonObject.addProperty("parse_mode","1");
-//        jsonObject.addProperty("disable_notification","1");
+//        jsonObject.addProperty("disable_notification","1");getPureVideoMsgList
 //        jsonObject.addProperty("reply_to_message_id","1");
 //        jsonObject.addProperty("reply_markup","1");
             String json = jsonObject.toString();
