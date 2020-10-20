@@ -33,9 +33,12 @@ public class IndexController {
     @RequestMapping("/jav")
     @ResponseBody
     String jav() {
+//        System.setProperty("socksProxyHost", "127.0.0.1");
+//        System.setProperty("socksProxyPort", "10808");
 //        String param = "ua=fa951fa6cd6a040efa24debcc1e745cd; platform_cookie_reset=pc; platform=pc; bs=ngduxz9qyp0exphobipkum7gkgioyikl; ss=366429587298295058; fg_9d12f2b2865de2f8c67706feaa332230=33622.100000; _ga=GA1.2.743455686.1598673960; _gid=GA1.2.1094844638.1598673960; il=v16xxqZypvLcHbaDKcuLRivBRSJGtxHxf_QetsORBlLTwxNjA2NDUwMDU0c2VuekgydVIycWJYd3lHTWdrZkJKc2E2WUx2VnN4SG0zVmkweEFzMw..; expiredEnterModalShown=1," +
 //                "https://cn.pornhub.com/pornstars?age=18-30";
-        String param = "https://www.javbus.com/genre/sub";
+//        String param = "https://www.javbus.com/genre/sub";
+        String param = "https://www.busfan.one/";
         javServer.getVideosByCookie(param.split(","));
         return "ok";
     }
@@ -43,6 +46,8 @@ public class IndexController {
     @RequestMapping("/test")
     @ResponseBody
     String test() {
+//        System.setProperty("socksProxyHost", "127.0.0.1");
+//        System.setProperty("socksProxyPort", "10808");
 //        String param = "ua=fa951fa6cd6a040efa24debcc1e745cd; platform_cookie_reset=pc; platform=pc; bs=ngduxz9qyp0exphobipkum7gkgioyikl; ss=366429587298295058; fg_9d12f2b2865de2f8c67706feaa332230=33622.100000; _ga=GA1.2.743455686.1598673960; _gid=GA1.2.1094844638.1598673960; il=v16xxqZypvLcHbaDKcuLRivBRSJGtxHxf_QetsORBlLTwxNjA2NDUwMDU0c2VuekgydVIycWJYd3lHTWdrZkJKc2E2WUx2VnN4SG0zVmkweEFzMw..; expiredEnterModalShown=1," +
 //                "https://cn.pornhub.com/pornstars?age=18-30";
         String param = "https://cn.pornhub.com/categories/hentai,https://cn.pornhub.com/video?c=502,https://cn.pornhub.com/video/incategories/compilation/female-orgasm,https://cn.pornhub.com/video/incategories/female-orgasm/japanese";
@@ -53,6 +58,8 @@ public class IndexController {
     @RequestMapping("/pushPageFail")
     @ResponseBody
     String pushPageFail() {
+//        System.setProperty("socksProxyHost", "127.0.0.1");
+//        System.setProperty("socksProxyPort", "10808");
         pushTelegramServer.pushPageFail("2020082612mzitu详细内容","xxx/sendPhoto");
         return "ok";
     }

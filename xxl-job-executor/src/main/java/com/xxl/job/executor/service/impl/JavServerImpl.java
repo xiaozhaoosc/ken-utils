@@ -55,8 +55,8 @@ public class JavServerImpl implements JavServer {
 
     private void postIndex(String[] params) throws Exception {
         String url = params[0];
-        System.setProperty("socksProxyHost", "127.0.0.1");
-        System.setProperty("socksProxyPort", "10808");
+//        System.setProperty("socksProxyHost", "127.0.0.1");
+//        System.setProperty("socksProxyPort", "10808");
         String context = ApacheHttpClientUtils.sendGet(url);
         Document doc = Jsoup.parse(context);
 //        Document doc = Jsoup.connect(url).get();

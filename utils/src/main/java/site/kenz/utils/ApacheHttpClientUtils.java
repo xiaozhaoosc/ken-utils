@@ -41,8 +41,8 @@ public class ApacheHttpClientUtils {
     // fluent 链式调用
     public static String sendGet(String url) throws Exception {
         http://127.0.0.1:10810/pac/?t=170124
-        System.setProperty("socksProxyHost", "127.0.0.1");
-        System.setProperty("socksProxyPort", "10808");
+//        System.setProperty("socksProxyHost", "127.0.0.1");
+//        System.setProperty("socksProxyPort", "10808");
 //        executor.execute(Request.Get(url))
 //                .returnContent().asString();
         return Request.Get(url)
@@ -53,9 +53,9 @@ public class ApacheHttpClientUtils {
 
     // fluent 链式调用
     public static String sendGet(String url, Map<String, String> headParams) throws Exception {
-        http://127.0.0.1:10810/pac/?t=170124
-        System.setProperty("socksProxyHost", "127.0.0.1");
-        System.setProperty("socksProxyPort", "10808");
+//        http://127.0.0.1:10810/pac/?t=170124
+//        System.setProperty("socksProxyHost", "127.0.0.1");
+//        System.setProperty("socksProxyPort", "10808");
 //        executor.execute(Request.Get(url))
 //                .returnContent().asString();
         Request request = Request.Get(url)
@@ -184,8 +184,8 @@ public class ApacheHttpClientUtils {
         // 注意：如果设置了 SOCKS 代理就不要设 HTTP/HTTPS 代理
 //        System.setProperty("proxySet", "true");
 //        System.setProperty("java.net.useSystemProxies", "true");
-        System.setProperty("socksProxyHost", "127.0.0.1");
-        System.setProperty("socksProxyPort", "10808");
+//        System.setProperty("socksProxyHost", "127.0.0.1");
+//        System.setProperty("socksProxyPort", "10808");
         String response = executor.execute(Request.Post(url)
                 .useExpectContinue()
 //                .viaProxy(new HttpHost("127.0.0.1", 10808, "SOCKS5"))
@@ -391,8 +391,8 @@ public class ApacheHttpClientUtils {
         String url = "https://www.pornhub.com";
 //        System.out.println("http get rsp:" + ApacheHttpClientUtils.sendGet(url));
         String context = ApacheHttpClientUtils.sendGet(url);
-        System.setProperty("socksProxyHost", "127.0.0.1");
-        System.setProperty("socksProxyPort", "10808");
+//        System.setProperty("socksProxyHost", "127.0.0.1");
+//        System.setProperty("socksProxyPort", "10808");
         Document doc = Jsoup.parse(context);
 //        Document doc = Jsoup.connect(url).get();
 //        System.out.println(doc.title());
