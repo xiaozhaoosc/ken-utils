@@ -106,6 +106,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
         </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <version>2.3.0.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
