@@ -38,7 +38,7 @@ public class IndexController {
 //        String param = "ua=fa951fa6cd6a040efa24debcc1e745cd; platform_cookie_reset=pc; platform=pc; bs=ngduxz9qyp0exphobipkum7gkgioyikl; ss=366429587298295058; fg_9d12f2b2865de2f8c67706feaa332230=33622.100000; _ga=GA1.2.743455686.1598673960; _gid=GA1.2.1094844638.1598673960; il=v16xxqZypvLcHbaDKcuLRivBRSJGtxHxf_QetsORBlLTwxNjA2NDUwMDU0c2VuekgydVIycWJYd3lHTWdrZkJKc2E2WUx2VnN4SG0zVmkweEFzMw..; expiredEnterModalShown=1," +
 //                "https://cn.pornhub.com/pornstars?age=18-30";
 //        String param = "https://www.javbus.com/genre/sub";
-        String param = "https://www.busfan.one/";
+        String param = "https://www.busfan.one/series/i8k";
         javServer.getVideosByCookie(param.split(","));
         return "ok";
     }

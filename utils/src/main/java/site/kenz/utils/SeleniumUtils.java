@@ -41,6 +41,7 @@ public class SeleniumUtils {
                 TimeUnit.MILLISECONDS.sleep(waitTime);
                 long timeout = 300000;
                 // 循环下拉，直到全部加载完成或者超时
+
 //                new Actions(webDriver).sendKeys(Keys.END).perform();
 
             } catch (InterruptedException e) {
