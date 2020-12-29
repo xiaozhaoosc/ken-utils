@@ -3,13 +3,21 @@ package com.xxl.job.executor.mvc.controller;
 import com.xxl.job.executor.service.JavServer;
 import com.xxl.job.executor.service.PronVideoServer;
 import com.xxl.job.executor.service.PushTelegramServer;
+import org.apache.http.client.fluent.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @EnableAutoConfiguration
@@ -21,14 +29,27 @@ public class IndexController {
     private PronVideoServer pronVideoServer;
     @Autowired
     private JavServer javServer;
+    @Autowired
+    private Environment environment;
 
     private static Logger logger = LoggerFactory.getLogger(IndexController.class);
-    @RequestMapping("/")
-    @ResponseBody
-    String index() {
-        return "xxl job executor running.";
-    }
+//    @RequestMapping("/")
+//    @ResponseBody
+//    String index() {
+//        return "xxl job executor running.";
+//    }
 
+    @GetMapping(path = "/{invite}")
+    @ResponseBody
+    void index(@PathVariable(name = "invite") String invite, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setStatus(301);
+//        wzef2ku
+        logger.info(invite);
+        String url = environment.getProperty("kuailianurl", "https://www.kuailian.link/invite/register.html?invite=") + invite;
+        response.setHeader("Location",url);
+//---分割线---
+        response.sendRedirect(url);
+    }
 
     @RequestMapping("/jav")
     @ResponseBody
