@@ -19,8 +19,8 @@ import java.util.List;
  *
  */
 @Component
-public class imXxlJob {
-    private static Logger logger = LoggerFactory.getLogger(imXxlJob.class);
+public class ImXxlJob {
+    private static Logger logger = LoggerFactory.getLogger(ImXxlJob.class);
 
     @Autowired
     private PushTelegramServer pushTelegramServer;
@@ -54,31 +54,68 @@ public class imXxlJob {
         }
         String[] params = param.split(",");
 //        wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/init.tar
-        String init = "cd /opt;wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/v2/init.tar;tar -xvf init.tar";
-        String jdk = "sh /opt/init/init.sh " + params[3] + ";sh /opt/init/insertJdk.sh;java -version";
+        String init = "cd /opt;wget http://file.im5555.com:81/u/123/100123/202012/cc64a92be6474fdea6a7d333e9e4facd.tar;mv cc64a92be6474fdea6a7d333e9e4facd.tar init.tar; tar -xvf init.tar";
+//        String init = "cd /opt;wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/init.tar;tar -xvf init.tar";
+        String down = "sh /opt/init/init.sh " + params[3];
+        String insertJdk = "sh /opt/init/insertJdk.sh;";
         String ipStr = getIp(params[0],params[1]);
-        String initDocker = "sh /opt/init/initProject.sh; sh /opt/init/initDocker.sh  " + ipStr + "  " + params[2];
+        String initDocker = "sh /opt/init/initDocker.sh  " + ipStr + "  " + params[2];
         String ipaddr = "ip addr";
 
 
         XxlJobLogger.log("ipStr:" + ipStr);
         logger.info("ipStr:" + ipStr);
 
+        XxlJobLogger.log("系统更新-开始执行");
+        String updateStr = "yes yes | yum update ";
+        exec(params[0],params[1],updateStr);
+        XxlJobLogger.log("系统更新-结束执行");
+
+
         XxlJobLogger.log("初始化-开始执行");
         exec(params[0],params[1],init);
         XxlJobLogger.log("初始化-结束执行");
 
+        XxlJobLogger.log("下载项目-开始执行");
+        exec(params[0],params[1],down);
+        XxlJobLogger.log("下载项目-结束执行");
+
+
+        XxlJobLogger.log("下载软件-开始执行");
+        String mongo = "wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/mongodb-linux-x86_64-3.4.0.tgz ";
+        exec(params[0],params[1],mongo);
+        String redis = "wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/redis-4.0.1.tar  ";
+        exec(params[0],params[1],redis);
+        String rocketmq = "wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/rocketmq-all-4.3.2-bin-release.tar";
+        exec(params[0],params[1],rocketmq);
+        String jdk8u131 = "wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/jdk-8u131-linux-x64.tar.gz";
+        exec(params[0],params[1],jdk8u131);
+        XxlJobLogger.log("下载软件-结束执行");
 
         XxlJobLogger.log("JDK-开始执行");
-        exec(params[0],params[1],jdk);
+        exec(params[0],params[1],insertJdk);
         XxlJobLogger.log("JDK-结束执行");
 
 
+        XxlJobLogger.log("initProject-开始执行");
+        String initProject = "sh /opt/init/initProject.sh";
+        exec(params[0],params[1],initProject);
+        XxlJobLogger.log("initProject-结束执行");
 
-        XxlJobLogger.log("依赖软件安装-开始执行");
+        XxlJobLogger.log("依赖软件安装insertMongo-开始执行");
+        String insertMongo = "sh /opt/init/insertMongo.sh";
+        exec(params[0],params[1],insertMongo);
+        XxlJobLogger.log("依赖软件安装insertMongo-结束执行");
+
+        XxlJobLogger.log("依赖软件安装docker-开始执行");
+        String docker = "yes yes | yum install docker;systemctl start docker && systemctl enable docker";
+        exec(params[0],params[1],docker);
+        XxlJobLogger.log("依赖软件安装docker-结束执行");
+
+        XxlJobLogger.log("依赖软件安装initDocker-开始执行");
         exec(params[0],params[1],initDocker);
-        XxlJobLogger.log("依赖软件安装-结束执行");
-        XxlJobLogger.log("");
+        XxlJobLogger.log("依赖软件安装initDocker-结束执行");
+
         return ReturnT.SUCCESS;
     }
 
@@ -135,7 +172,30 @@ public class imXxlJob {
             exec(params[0],params[1],logo);
             XxlJobLogger.log("logo替换-结束执行");
         }
+        XxlJobLogger.log("项目启动tigase-开始执行");
+        exec(params[0],params[1],tigase);
+        XxlJobLogger.log("项目启动tigase-结束执行");
 
+        XxlJobLogger.log("项目启动imapi-开始执行");
+        exec(params[0],params[1],imapi);
+        XxlJobLogger.log("项目启动imapi-结束执行");
+
+        XxlJobLogger.log("项目启动upload-开始执行");
+        exec(params[0],params[1],upload);
+        XxlJobLogger.log("项目启动upload-结束执行");
+
+        XxlJobLogger.log("项目启动message-开始执行");
+        exec(params[0],params[1],message);
+        XxlJobLogger.log("项目启动message-结束执行");
+
+
+        XxlJobLogger.log("项目启动shikupush-开始执行");
+        exec(params[0],params[1],shikupush);
+        XxlJobLogger.log("项目启动shikupush-结束执行");
+
+        XxlJobLogger.log("项目启动mpserver-开始执行");
+        exec(params[0],params[1],mpserver);
+        XxlJobLogger.log("项目启动mpserver-结束执行");
 
         return ReturnT.SUCCESS;
     }
