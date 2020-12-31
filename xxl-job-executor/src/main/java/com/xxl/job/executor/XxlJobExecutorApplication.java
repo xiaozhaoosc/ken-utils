@@ -10,9 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class XxlJobExecutorApplication {
 
 	public static void main(String[] args) {
-
-        System.setProperty("socksProxyHost", "127.0.0.1");
-        System.setProperty("socksProxyPort", "10808");
         SpringApplication.run(XxlJobExecutorApplication.class, args);
 	}
 
