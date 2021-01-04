@@ -1,20 +1,14 @@
 package site.kenz.utils;
 
 import com.google.gson.JsonObject;
-import com.sun.deploy.net.HttpUtils;
 import io.netty.channel.unix.DomainSocketAddress;
 import okhttp3.*;
-import org.apache.http.HttpEntity;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpResponseException;
 import org.apache.http.util.CharsetUtils;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OkHttpUtils {

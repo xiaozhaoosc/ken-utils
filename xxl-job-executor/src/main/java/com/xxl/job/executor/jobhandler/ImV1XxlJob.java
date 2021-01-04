@@ -5,10 +5,8 @@ import com.jcraft.jsch.Session;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.job.core.log.XxlJobLogger;
-import com.xxl.job.executor.service.PushTelegramServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import site.kenz.utils.StringUtils;
 
@@ -21,9 +19,6 @@ import java.util.List;
 @Component
 public class ImV1XxlJob {
     private static Logger logger = LoggerFactory.getLogger(ImXxlJob.class);
-
-    @Autowired
-    private PushTelegramServer pushTelegramServer;
 
     /**
      * 输入Cookic

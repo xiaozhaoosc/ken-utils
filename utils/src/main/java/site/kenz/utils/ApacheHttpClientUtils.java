@@ -263,6 +263,9 @@ public class ApacheHttpClientUtils {
     }
 
     public static void main(String[] args) throws Exception {
+        String s = "47.57.234.199,5UKjRDvIVwKOt18E,im1110.cn,乐\n" +
+                "信,lexin0104,http://file.im5555.com:81/u/123/100123/202101/o/0503016cd6204f7f945c637bce2729ed.jpg,com.lexin.chat,https://quyangdata.oss-cn-shanghai.aliyuncs.com/temp/wzyz/apns_pro.p123";
+        System.out.println(s.replace("\n",""));
         //请求首页
 //        postIndex();
 
@@ -281,19 +284,19 @@ public class ApacheHttpClientUtils {
 //        }
 
 
-        Map<String, String> headParam = new HashMap<String, String>();
-//        headParam.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        headParam.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-        headParam.put("Accept-Encoding", "gzip, deflate, br");
-        headParam.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6");
-        headParam.put("Cache-Control", "no-cache");
-        headParam.put("Connection", "keep-alive");
-        headParam.put("Cookie", "ua=fa951fa6cd6a040efa24debcc1e745cd; platform_cookie_reset=pc; platform=pc; bs=ngduxz9qyp0exphobipkum7gkgioyikl; ss=366429587298295058; fg_9d12f2b2865de2f8c67706feaa332230=33622.100000; _ga=GA1.2.743455686.1598673960; _gid=GA1.2.1094844638.1598673960; il=v16xxqZypvLcHbaDKcuLRivBRSJGtxHxf_QetsORBlLTwxNjA2NDUwMDU0c2VuekgydVIycWJYd3lHTWdrZkJKc2E2WUx2VnN4SG0zVmkweEFzMw..; expiredEnterModalShown=1");
-        headParam.put("Host", "cn.pornhub.com");
-        headParam.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36 Edg/85.0.564.41");
-
-
-        getVideo(headParam);
+//        Map<String, String> headParam = new HashMap<String, String>();
+////        headParam.put("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+//        headParam.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+//        headParam.put("Accept-Encoding", "gzip, deflate, br");
+//        headParam.put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6");
+//        headParam.put("Cache-Control", "no-cache");
+//        headParam.put("Connection", "keep-alive");
+//        headParam.put("Cookie", "ua=fa951fa6cd6a040efa24debcc1e745cd; platform_cookie_reset=pc; platform=pc; bs=ngduxz9qyp0exphobipkum7gkgioyikl; ss=366429587298295058; fg_9d12f2b2865de2f8c67706feaa332230=33622.100000; _ga=GA1.2.743455686.1598673960; _gid=GA1.2.1094844638.1598673960; il=v16xxqZypvLcHbaDKcuLRivBRSJGtxHxf_QetsORBlLTwxNjA2NDUwMDU0c2VuekgydVIycWJYd3lHTWdrZkJKc2E2WUx2VnN4SG0zVmkweEFzMw..; expiredEnterModalShown=1");
+//        headParam.put("Host", "cn.pornhub.com");
+//        headParam.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36 Edg/85.0.564.41");
+//
+//
+//        getVideo(headParam);
     }
 
     private static void getVideo(Map<String, String> headParam) {

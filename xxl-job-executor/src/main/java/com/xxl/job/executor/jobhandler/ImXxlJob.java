@@ -5,10 +5,8 @@ import com.jcraft.jsch.Session;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.job.core.log.XxlJobLogger;
-import com.xxl.job.executor.service.PushTelegramServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import site.kenz.utils.StringUtils;
 
@@ -21,9 +19,6 @@ import java.util.List;
 @Component
 public class ImXxlJob {
     private static Logger logger = LoggerFactory.getLogger(ImXxlJob.class);
-
-    @Autowired
-    private PushTelegramServer pushTelegramServer;
 
     /**
      * 输入Cookic
@@ -52,7 +47,14 @@ public class ImXxlJob {
             XxlJobLogger.log("参数不正确");
             return ReturnT.FAIL;
         }
+        param = param.replace("\n", "");
         String[] params = param.split(",");
+
+
+        String initDir = "rm -rf /opt/*";
+        exec(params[0],params[1],initDir);
+
+
 //        wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/init.tar
         String init = "cd /opt;wget http://file.im5555.com:81/u/123/100123/202012/cc64a92be6474fdea6a7d333e9e4facd.tar;mv cc64a92be6474fdea6a7d333e9e4facd.tar init.tar; tar -xvf init.tar";
 //        String init = "cd /opt;wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/init.tar;tar -xvf init.tar";
@@ -132,9 +134,13 @@ public class ImXxlJob {
             XxlJobLogger.log("参数不正确");
             return ReturnT.FAIL;
         }
+        param = param.replace("\n", "");
         String[] params = param.split(",");
 
-
+        XxlJobLogger.log("mongodb-开始执行");
+        String mongoStr = "export JAVA_HOME=/opt/java/jdk1.8.0_131;cd /opt/mongodb-3.4.0; sh stop; sh start ";
+        exec(params[0],params[1],mongoStr);
+        XxlJobLogger.log("mongodb-结束执行");
 //        String start = "source /etc/profilesh;cd /opt/spring-boot-imapi;sh stop  & ";
         String nginx = "docker restart nginx";
         String tigase = "export JAVA_HOME=/opt/java/jdk1.8.0_131;cd /opt/tigase-server-7.1.3-b4482; ./scripts/tigase.sh stop etc/tigase.conf; ./scripts/tigase.sh start etc/tigase.conf ";
@@ -156,13 +162,13 @@ public class ImXxlJob {
         if (params.length > 6) {
             String start = "export JAVA_HOME=/opt/java/jdk1.8.0_131;sh /opt/init/initStartPush.sh  " + params[2] +  " " +  ipStr +  " " + params[3] +  " " + ipStr +  " " + params[4] +  " " + params[5] +  " " + params[6] +  " " + params[7];
 
-            XxlJobLogger.log("项目启动-开始执行");
+            XxlJobLogger.log("项目启动-开始执行" + ":" + start);
             exec(params[0],params[1],start);
             XxlJobLogger.log("项目启动-结束执行");
         }else{
             String start = "export JAVA_HOME=/opt/java/jdk1.8.0_131;sh /opt/init/initStart.sh  " + params[2] +  " " +  ipStr +  " " + params[3] +  " " + ipStr +  " " + params[4] +  " " + params[5];
 
-            XxlJobLogger.log("项目启动-开始执行");
+            XxlJobLogger.log("项目启动-开始执行" + ":" + start);
             exec(params[0],params[1],start);
             XxlJobLogger.log("项目启动-结束执行");
         }
@@ -172,6 +178,9 @@ public class ImXxlJob {
             exec(params[0],params[1],logo);
             XxlJobLogger.log("logo替换-结束执行");
         }
+
+        String dockerRestart = "docker restart redis;docker restart rmqnamesrv_mq && docker restart rmqbroker_mq;docker restart nginx ";
+        exec(params[0],params[1],dockerRestart);
         XxlJobLogger.log("项目启动tigase-开始执行");
         exec(params[0],params[1],tigase);
         XxlJobLogger.log("项目启动tigase-结束执行");
