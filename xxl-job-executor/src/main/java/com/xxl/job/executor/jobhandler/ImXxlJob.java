@@ -55,9 +55,8 @@ public class ImXxlJob {
         exec(params[0],params[1],initDir);
 
 
-//        wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/init.tar
-        String init = "cd /opt;wget http://file.im5555.com:81/u/123/100123/202012/cc64a92be6474fdea6a7d333e9e4facd.tar;mv cc64a92be6474fdea6a7d333e9e4facd.tar init.tar; tar -xvf init.tar";
-//        String init = "cd /opt;wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/init.tar;tar -xvf init.tar";
+//        wget http://47.57.69.130/soft/init.tar
+        String init = "cd /opt;wget http://47.57.69.130/soft/init.tar; tar -xvf init.tar";
         String down = "sh /opt/init/init.sh " + params[3];
         String insertJdk = "sh /opt/init/insertJdk.sh;";
         String ipStr = getIp(params[0],params[1]);
@@ -84,13 +83,13 @@ public class ImXxlJob {
 
 
         XxlJobLogger.log("下载软件-开始执行");
-        String mongo = "wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/mongodb-linux-x86_64-3.4.0.tgz ";
+        String mongo = "wget http://47.57.69.130/soft/mongodb-linux-x86_64-3.4.0.tgz ";
         exec(params[0],params[1],mongo);
-        String redis = "wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/redis-4.0.1.tar  ";
+        String redis = "wget http://47.57.69.130/soft/redis-4.0.1.tar  ";
         exec(params[0],params[1],redis);
-        String rocketmq = "wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/rocketmq-all-4.3.2-bin-release.tar";
+        String rocketmq = "wget http://47.57.69.130/soft/rocketmq-all-4.3.2-bin-release.tar";
         exec(params[0],params[1],rocketmq);
-        String jdk8u131 = "wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/fenche/jdk-8u131-linux-x64.tar.gz";
+        String jdk8u131 = "wget http://47.57.69.130/soft/jdk-8u131-linux-x64.tar.gz";
         exec(params[0],params[1],jdk8u131);
         XxlJobLogger.log("下载软件-结束执行");
 
@@ -227,55 +226,6 @@ public class ImXxlJob {
                 ) {
                     System.out.println(result);
                 }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.disconnect();
-            }
-        }
-    }
-    public void exec(String ip,String password,String pass,String logo){
-        String init = "cd /opt;wget https://quyangdata.oss-cn-shanghai.aliyuncs.com/v2/init.tar;tar -xvf init.tar";
-        String jdk = "sh /opt/init/init.sh lefuhuliao;sh /opt/init/insertJdk.sh;java -version";
-        String ipStr = getIp(ip, password);
-        String initDocker = "sh /opt/init/initProject.sh; sh /opt/init/initDocker.sh  " + ipStr + "  " + pass;
-        String ipaddr = "ip addr";
-        Session session = SSHLoginUtils.getSession(ip, password);
-
-        try {
-            List<String> s  = Lists.newArrayList();
-            s = SSHLoginUtils.channelExec(session,init);
-            if (s.size() > 0) {
-                for (String result:s
-                     ) {
-                    System.out.println(result);
-                }
-            }
-            s = SSHLoginUtils.channelExec(session,jdk);
-            if (s.size() > 0) {
-                for (String result:s
-                ) {
-                    System.out.println(result);
-                }
-            }
-            s = SSHLoginUtils.channelExec(session,initDocker);
-            List<String> ips  = Lists.newArrayList();
-            if (s.size() > 0) {
-                for (String result:s
-                ) {
-                    if (result.trim().startsWith("inet") && result.indexOf("1") > 0) {
-                        System.out.println(result + result.indexOf("/"));
-                        ips.add(result.substring(result.indexOf("1"), result.indexOf("/")));
-                    }
-                    System.out.println(result);
-                }
-            }
-
-            for (String result:ips
-            ) {
-                System.out.println(result);
             }
         } catch (Exception e) {
             e.printStackTrace();
