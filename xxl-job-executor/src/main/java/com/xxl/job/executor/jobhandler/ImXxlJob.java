@@ -149,7 +149,9 @@ public class ImXxlJob {
         String message = "cd /opt/message-push;sh stop; nohup /opt/java/jdk1.8.0_131/bin/java -XX:+UseG1GC  -jar message-push-*.war --spring.config.location=./application.properties > /dev/null 2>&1 & ";
 
         String shikupush = "cd /opt/shiku-push;sh stop; nohup /opt/java/jdk1.8.0_131/bin/java -XX:+UseG1GC  -jar shiku-push-*.war --spring.config.location=./application.properties > /dev/null 2>&1 & ";
-        String mpserver = "cd /opt/mp-server;sh stop; nohup /opt/java/jdk1.8.0_131/bin/java -XX:+UseG1GC  -jar mp-server-1.0.war --spring.config.location=/opt/mp-server/mpserver.properties > ./logs/log.log & ";
+        String mpserver = "cd /opt/mp-server;sh stop; " +
+                "" +
+                "";
 
 //        logger.info("===================================");
 //        XxlJobLogger.log("项目启动-开始执行");
