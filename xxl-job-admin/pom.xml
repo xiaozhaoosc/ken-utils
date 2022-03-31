@@ -42,7 +42,7 @@
 		<spring.version>5.2.6.RELEASE</spring.version>
 		<spring-boot.version>2.3.0.RELEASE</spring-boot.version>
 <!--		<spring-boot.version>2.1.6.RELEASE</spring-boot.version>-->
-		<spring-boot-starter.version>2.3.0.RELEASE</spring-boot-starter.version>
+		<spring-boot-starter.version>2.5.12</spring-boot-starter.version>
 
 		<mybatis-spring-boot-starter.version>2.1.2</mybatis-spring-boot-starter.version>
 		<mysql-connector-java.version>8.0.20</mysql-connector-java.version>
