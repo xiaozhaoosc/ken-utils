@@ -45,7 +45,7 @@
 		<spring-boot-starter.version>2.3.0.RELEASE</spring-boot-starter.version>
 
 		<mybatis-spring-boot-starter.version>2.1.2</mybatis-spring-boot-starter.version>
-		<mysql-connector-java.version>8.0.20</mysql-connector-java.version>
+		<mysql-connector-java.version>8.0.28</mysql-connector-java.version>
 
 		<slf4j-api.version>1.7.30</slf4j-api.version>
 		<junit.version>4.13</junit.version>
